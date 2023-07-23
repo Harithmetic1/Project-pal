@@ -23,12 +23,12 @@ const Landing = () => {
             </div>
             <div className="btn-container flex  items-center gap-6 mt-[60px]">
               <Link href="/register">
-                <button className="bg-red-secondary flex-auto py-3 px-6 md:px-8 rounded-lg">
+                <button className="bg-red-secondary flex-auto px-5 w-[139px] h-[44px] text-[0.9rem] md:px-8 rounded-lg">
                   Get Started
                 </button>
               </Link>
               <Link href="/login">
-                <button className="bg-transparent flex-auto py-3 px-[46px] md:px-14 border-2 border-red-secondary text-red-secondary rounded-lg">
+                <button className="bg-transparent flex-auto  px-5 w-[139px] h-[44px] text-[0.9rem] md:px-14 border-2 border-red-secondary text-red-secondary rounded-lg">
                   Login
                 </button>
               </Link>
