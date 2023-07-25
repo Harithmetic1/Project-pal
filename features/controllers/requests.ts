@@ -1,6 +1,8 @@
+import React from "react";
 import axios from "axios";
 import { registerDetails } from "../models/Interface";
 import { registerEndpoint } from "../APIConfig";
+import { toast } from "react-toastify";
 
 const httpRegister = async (registerDetails: registerDetails) => {
     try {
@@ -16,11 +18,13 @@ const httpRegister = async (registerDetails: registerDetails) => {
             linkedIn: registerDetails.linkedIn,
             password: registerDetails.password
         })
-
         console.log(request);
+        toast("Registration Successful", { hideProgressBar: true, autoClose: 2000, type: 'success' })
+        return true
         
     } catch (error) {
         console.log(error);
+        toast(`Error: ${error}`, { hideProgressBar: true, autoClose: 2000, type: 'error' })
     }
     
 }

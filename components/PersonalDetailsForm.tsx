@@ -18,7 +18,7 @@ const PersonalDetailsForm = () => {
                     <span className='invert'>
                         {/* <Message /> */}
                     </span>
-                    <input type="text" name="first_name" onChange={handleInputChange} className="email-input bg-transparent outline-none w-full text-black" placeholder="Enter your first name" />
+                    <input required type="text" name="first_name" onChange={handleInputChange} className="email-input bg-transparent outline-none w-full text-black" placeholder="Enter your first name" />
                 </div>
             </div>
             <div className="username pt-[42px]">
@@ -31,7 +31,7 @@ const PersonalDetailsForm = () => {
                     <span className='invert'>
                         {/* <User /> */}
                     </span>
-                    <input type="text" name="last_name" onChange={handleInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your last name" />
+                    <input required type="text" name="last_name" onChange={handleInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your last name" />
                 </div>
             </div>
             <div className="social-link mt-[49px]">
@@ -44,7 +44,7 @@ const PersonalDetailsForm = () => {
                     <span className='invert'>
                         {/* <Lock /> */}
                     </span>
-                    <input type="text" name="github" onChange={handleInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Link to social profile" />
+                    <input required type="text" name="github" onChange={handleInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Link to social profile" />
                     <span className='invert'>
                         {/* <RevealEye /> */}
                     </span>

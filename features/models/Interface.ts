@@ -1,4 +1,8 @@
-import React from "react"
+import React, { ReactElement } from "react"
+
+interface ComponentWithChild {
+  children: ReactElement
+}
 
 interface registerDetails {
     email: string,
@@ -13,12 +17,24 @@ interface registerDetails {
   password: string
 }
 
+interface validPasswordState {
+  lowerCasePattern: boolean,
+  upperCasePattern: boolean,
+  digitPattern: boolean,
+  tenCharPattern: boolean,
+  confirmAllPattern: boolean
+}
+
 interface AuthContextValue {
   userDetails: registerDetails,
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  validPassword: validPasswordState,
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleValidPassword: () => void,
 }
 
 export type {
+    ComponentWithChild,
     registerDetails, 
-    AuthContextValue
+    AuthContextValue,
+    validPasswordState
 }

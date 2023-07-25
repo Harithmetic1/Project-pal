@@ -8,16 +8,23 @@ import PersonalDetailsForm from '../components/PersonalDetailsForm';
 import ActionButton from '../components/reusables/ActionButton';
 import { AuthContext } from '../features/authentication/contex/AuthContext';
 import { AuthContextValue } from '../features/models/Interface';
-import { httpRegister } from '../features/controllers/requests';
+// import { httpRegister } from '../features/controllers/requests';
+import { RequestContext } from '../features/controllers/RequestContext';
 
 
 const register = () => {
     // const [registerDetails, setRegisterDetails] = useState<registerDetails>();
     const [toggleForm, setToggleForm] = useState<boolean>(false);
 
+
     const {
-        userDetails
+        userDetails,
     } = useContext<AuthContextValue>(AuthContext)
+
+    const {
+        isLoading,
+        httpRegister
+    } = useContext(RequestContext)
 
     return (
         <AuthLayouts>
@@ -29,9 +36,10 @@ const register = () => {
                             Sign up
                         </h1>
                         <div className="sign-in-caption mt-[22px] text-black">
-                            <p>
+
+                            {toggleForm ? <p className='text-[20px] font-semibold'> <span className='mr-2' onClick={() => setToggleForm(false)}>&larr;</span> Personal Details</p> : <p>
                                 If you already have an account registered <br />You can <span className="text-red-secondary"><Link href="/login">Login here !</Link></span>
-                            </p>
+                            </p>}
                         </div>
                     </div>
                 </div>
@@ -45,10 +53,16 @@ const register = () => {
                     <div className="submit-btn mt-[60px]">
                         {!toggleForm ?
                             <ActionButton buttonText='Continue' onClick={(e) => {
-                                e.preventDefault()
-                                setToggleForm(true)
+                                if (
+                                    userDetails.email &&
+                                    userDetails.username &&
+                                    userDetails.password
+                                ) {
+                                    e.preventDefault()
+                                    setToggleForm(true)
+                                }
                             }} /> :
-                            <ActionButton buttonText='Register' onClick={(e) => {
+                            <ActionButton buttonText={`${isLoading ? "Loading..." : "Register"} `} onClick={(e) => {
                                 e.preventDefault()
                                 httpRegister(userDetails)
                             }} />
