@@ -12,7 +12,7 @@ import { AuthContextValue } from '../features/models/Interface';
 import { RequestContext } from '../features/controllers/RequestContext';
 
 
-const register = () => {
+const Register = () => {
     // const [registerDetails, setRegisterDetails] = useState<registerDetails>();
     const [toggleForm, setToggleForm] = useState<boolean>(false);
 
@@ -74,4 +74,4 @@ const register = () => {
     )
 }
 
-export default register;
+export default Register;
