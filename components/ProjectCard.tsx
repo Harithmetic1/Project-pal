@@ -6,16 +6,16 @@ import ArrowLink from './icons/ArrowLink';
 
 const ProjectCard = () => {
     return (
-        <div>
-            <div className="image-container flex items-center justify-center relative w-[352px]">
+        <div className='text-black flex flex-col sm:flex-row justify-center items-center'>
+            <div className="image-container w-full flex items-center justify-center relative ">
                 <Image
                     src="/Rectangle.png"
                     alt="Rectangle"
-                    width={352}
+                    width={300}
                     height={150}
                 />
             </div>
-            <div className="project-description pt-[9px] px-2">
+            <div className="project-description pt-[9px] px-2 w-[310px] sm:w-full">
                 <div className="project-name-links flex justify-between">
                     <h1 className="project-name">
                         Weather App

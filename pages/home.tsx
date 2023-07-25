@@ -11,7 +11,7 @@ const home = () => {
             <Navbar />
             <div className="home-contents bg-background-color">
                 <UserProfileCard />
-                <div className="project-cards p-[30px] flex flex-col gap-5">
+                <div className="project-cards p-[15px] sm:p-[30px] flex flex-col gap-5">
                     <ProjectCard />
                     <ProjectCard />
                 </div>

@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import PageHeader from "../components/PageHeader";
 import Link from "next/link";
 
-import Message from '../components/icons/Message'
-import Lock from '../components/icons/Lock'
-import RevealEye from '../components/icons/RevealEye'
-import Facebook from '../components/icons/Facebook'
-import Google from '../components/icons/Google'
-import User from '../components/icons/User'
 import AuthLayouts from '../components/Layouts/AuthLayouts';
+import RegisterForm from '../components/RegisterForm';
+import PersonalDetailsForm from '../components/PersonalDetailsForm';
+import ActionButton from '../components/reusables/ActionButton';
+import { AuthContext } from '../features/authentication/contex/AuthContext';
+import { AuthContextValue } from '../features/models/Interface';
+import { httpRegister } from '../features/controllers/requests';
+
 
 const register = () => {
+    // const [registerDetails, setRegisterDetails] = useState<registerDetails>();
+    const [toggleForm, setToggleForm] = useState<boolean>(false);
+
+    const {
+        userDetails
+    } = useContext<AuthContextValue>(AuthContext)
+
     return (
         <AuthLayouts>
             <div className="login-container bg-background-color md:bg-white">
@@ -27,69 +35,24 @@ const register = () => {
                         </div>
                     </div>
                 </div>
-                <form className="login-form mt-[22px] p-[30px]">
-                    <div className="email">
-                        <div className="label pb-[11px]">
-                            <label htmlFor="email" className="text-placeholder text-[13px] font-md leading-5 md:border-black">
-                                Email
-                            </label>
-                        </div>
-                        <div className="input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black">
-                            <span className='invert'>
-                                <Message />
-                            </span>
-                            <input type="email" name="email" className="email-input bg-transparent outline-none w-full text-black" placeholder="Enter your email address" />
-                        </div>
-                    </div>
-                    <div className="username pt-[42px]">
-                        <div className="label pb-[11px]">
-                            <label htmlFor="username" className="text-placeholder text-[13px] font-md leading-5">
-                                Username
-                            </label>
-                        </div>
-                        <div className="input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black">
-                            <span className='invert'>
-                                <User />
-                            </span>
-                            <input type="text" name="username" className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your User name" />
-                        </div>
-                    </div>
-                    <div className="password mt-[49px]">
-                        <div className="label pb-[11px]">
-                            <label htmlFor="password" className="text-placeholder text-[13px] font-md leading-5">
-                                Password
-                            </label>
-                        </div>
-                        <div className="input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black">
-                            <span className='invert'>
-                                <Lock />
-                            </span>
-                            <input type="password" name="password" className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your Password" />
-                            <span className='invert'>
-                                <RevealEye />
-                            </span>
-                        </div>
-                    </div>
-                    <div className="password mt-[49px]">
-                        <div className="label pb-[11px]">
-                            <label htmlFor="confirm-password" className="text-placeholder text-[13px] font-md leading-5">
-                                Confirm Password
-                            </label>
-                        </div>
-                        <div className="input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black">
-                            <span className='invert'>
-                                <Lock />
-                            </span>
-                            <input type="password" name="confirm-password" className="email-input bg-transparent outline-none w-[100%] text-black" placeholder="Confirm your Password" />
-                            <span className='invert'>
-                                <RevealEye />
-                            </span>
-                        </div>
-                    </div>
+                <form className="login-form mt-[5px] p-[30px]">
+
+                    {!toggleForm ?
+                        <RegisterForm /> :
+                        <PersonalDetailsForm />
+                    }
+
                     <div className="submit-btn mt-[60px]">
-                        <button className="rounded-lg bg-red-secondary p-[14px] w-[100%]">
-                            Register
-                        </button>
+                        {!toggleForm ?
+                            <ActionButton buttonText='Continue' onClick={(e) => {
+                                e.preventDefault()
+                                setToggleForm(true)
+                            }} /> :
+                            <ActionButton buttonText='Register' onClick={(e) => {
+                                e.preventDefault()
+                                httpRegister(userDetails)
+                            }} />
+                        }
                     </div>
                 </form>
             </div>

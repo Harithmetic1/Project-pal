@@ -11,4 +11,4 @@ const Lock = () => {
   )
 }
 
-export default Lock
+export default Lock;

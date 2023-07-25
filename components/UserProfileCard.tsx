@@ -8,7 +8,7 @@ import FacebookOutline from '../components/icons/FacebookOutline'
 
 const UserProfileCard = () => {
     return (
-        <div className='p-[30px]'>
+        <div className='p-[30px] text-black'>
             <div className="profile-card flex items-center justify-center py-[11px] px-[6px] gap-[7px] border-purple-secondary border-[2px] rounded-[23px]">
                 <div className="img-icon">
                     <Image
@@ -21,12 +21,12 @@ const UserProfileCard = () => {
                 </div>
                 <div className="user-details pt-6 px-2">
                     <div className="name">
-                        <h2 className='text-xl'>
+                        <h2 className='text-xl text-black'>
                             Drishti Ratan
                         </h2>
                     </div>
                     <div className="title">
-                        <p className='text-[14px]'>
+                        <p className='text-[14px] text-black'>
                             Frontend Developer @Clover
                         </p>
                     </div>
