@@ -28,13 +28,21 @@ interface validPasswordState {
 interface AuthContextValue {
   userDetails: registerDetails,
   validPassword: validPasswordState,
+  loginDetails: loginInterface,
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   handleValidPassword: () => void,
+  handleLoginInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+}
+
+interface loginInterface{
+  username: string,
+  password: string
 }
 
 export type {
     ComponentWithChild,
     registerDetails, 
     AuthContextValue,
-    validPasswordState
+    validPasswordState,
+    loginInterface
 }

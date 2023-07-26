@@ -62,7 +62,7 @@ function RegisterForm() {
                         Password
                     </label>
                 </div>
-                <div className="input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black">
+                <div className={`input-field flex items-center gap-[7.42px] pb-[7px] border-b-2 border-black`}>
                     <span className='invert'>
                         <Lock />
                     </span>
@@ -71,7 +71,7 @@ function RegisterForm() {
                         {revealPassword ? <ShowEye /> : <RevealEye />}
                     </span>
                 </div>
-                <ul className='text-red-500'>
+                <ul className='text-red-500 text-[10px] font-medium'>
                     {!validPassword.tenCharPattern && <li>A minimum of 10 chararcters</li>}
                     {!validPassword.lowerCasePattern && <li>At least 1 lowercase letter </li>}
                     {!validPassword.digitPattern && <li>At least 1 number </li>}
@@ -93,7 +93,7 @@ function RegisterForm() {
                         {revealConfirmPassword ? <ShowEye /> : <RevealEye />}
                     </span>
                 </div>
-                {passwordConfirmed ? null : <p className="text-red-500">*Password does not match</p>}
+                {passwordConfirmed ? null : <p className="text-red-500 text-[10px] font-medium">*Password does not match</p>}
             </div>
         </div>
     )

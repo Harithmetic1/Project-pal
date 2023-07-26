@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import Link from "next/link";
 
@@ -8,9 +8,25 @@ import RevealEye from '../components/icons/RevealEye'
 import Facebook from '../components/icons/Facebook'
 import Google from '../components/icons/Google'
 import AuthLayouts from "../components/Layouts/AuthLayouts";
+import { AuthContext } from "../features/authentication/contex/AuthContext";
+import { RequestContext } from "../features/controllers/RequestContext";
+import ActionButton from "../components/reusables/ActionButton";
+
+import ShowEye from "../components/icons/ShowEye";
 
 
 const Login = () => {
+    const [revealPassword, setRevealPassword] = useState<boolean>(false)
+
+    const {
+        loginDetails,
+        handleLoginInputChange
+    } = useContext(AuthContext)
+
+    const {
+        isLoading,
+        httpLogin
+    } = useContext(RequestContext)
     return (
         <AuthLayouts>
             <div className="login-container bg-background-color md:bg-white ">
@@ -30,15 +46,15 @@ const Login = () => {
                 <form className="login-form mt-[22px] p-[30px]">
                     <div className="email text-black">
                         <div className="label pb-[11px]">
-                            <label htmlFor="email" className=" text-black text-[13px] font-md leading-5">
-                                Email
+                            <label htmlFor="username" className=" text-black text-[13px] font-md leading-5">
+                                Username
                             </label>
                         </div>
                         <div className="input-field flex items-center  gap-[7.42px] pb-[7px] border-b-2 border-black">
                             <span className="invert">
                                 <Message />
                             </span>
-                            <input type="email" name="email" className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your email address" />
+                            <input required type="username" name="username" onChange={handleLoginInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your email address" />
                         </div>
                     </div>
                     <div className="password mt-[49px] text-black">
@@ -51,9 +67,9 @@ const Login = () => {
                             <span className="invert">
                                 <Lock />
                             </span>
-                            <input type="email" name="password" className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your Password" />
-                            <span>
-                                <RevealEye />
+                            <input required type={revealPassword ? "text" : "password"} name="password" onChange={handleLoginInputChange} className="email-input bg-transparent w-full outline-none text-black" placeholder="Enter your Password" />
+                            <span onClick={() => setRevealPassword(!revealPassword)}>
+                                {revealPassword ? <RevealEye /> : <ShowEye />}
                             </span>
                         </div>
                     </div>
@@ -65,9 +81,16 @@ const Login = () => {
                         <p className="text-placeholder leading-[18px]">Forgot Password?</p>
                     </div>
                     <div className="submit-btn mt-[60px]">
-                        <button className="rounded-lg bg-red-secondary p-[14px] w-[100%]">
-                            Login
-                        </button>
+                        <ActionButton buttonText={isLoading ? "Loading..." : "Login"} onClick={(e) => {
+                            if (
+                                loginDetails.username &&
+                                loginDetails.password
+                            ) {
+                                e.preventDefault()
+                                httpLogin(loginDetails)
+                            }
+
+                        }} />
                     </div>
                     <div className="continue-with  flex flex-col justify-center items-center mt-[42px]">
                         <p className="text-black">

@@ -1,5 +1,5 @@
 import React, { ReactElement, createContext, useState } from "react";
-import { AuthContextValue, ComponentWithChild, registerDetails, validPasswordState } from "../../models/Interface";
+import { AuthContextValue, ComponentWithChild, loginInterface, registerDetails, validPasswordState } from "../../models/Interface";
 
 
 
@@ -23,8 +23,13 @@ const defaultAuthContext: AuthContextValue = {
         tenCharPattern: true,
         confirmAllPattern: true
     },
+    loginDetails: {
+        username: "",
+        password: ""
+    },
     handleInputChange: (e) => { },
-    handleValidPassword: () => { }
+    handleValidPassword: () => { },
+    handleLoginInputChange: (e) => { }
 }
 
 
@@ -47,6 +52,11 @@ const AuthProvider: React.FC<ComponentWithChild> = ({ children }) => {
         password: ""
     })
 
+    const [loginDetails, setLoginDetails] = useState<loginInterface>({
+        username: "",
+        password: ""
+    })
+
     const [validPassword, setValidPassword] = useState<validPasswordState>({
         lowerCasePattern: true,
         upperCasePattern: true,
@@ -64,9 +74,6 @@ const AuthProvider: React.FC<ComponentWithChild> = ({ children }) => {
             [name]: value
         })
 
-        // if (name === "password") {
-        //     handleValidPassword()
-        // }
     }
 
     const handleValidPassword = () => {
@@ -88,12 +95,24 @@ const AuthProvider: React.FC<ComponentWithChild> = ({ children }) => {
 
     }
 
+    const handleLoginInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let name = e.target.name;
+        let value = e.target.value;
+
+        setLoginDetails({
+            ...loginDetails,
+            [name]: value
+        })
+    }
+
     return (
         <AuthContext.Provider value={{
             userDetails,
             validPassword,
+            loginDetails,
             handleInputChange,
-            handleValidPassword
+            handleValidPassword,
+            handleLoginInputChange
         }}>
             {children}
         </AuthContext.Provider>
